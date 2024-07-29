@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 let myBalance = 10000;//Dollar
 
@@ -23,16 +24,16 @@ if (pinAns.pin === myPin){
                 name:"operation",
                 message:"please select option",
                 type:"list",
-                choices:["withdraw", "checkbalance"]
+                choices:["withdraw", "check balance","Fast Cash"],
             }
 
         ]
     );
 
-    console.log(operationAns);
+    console.log(operationAns.operation);
 
     if (operationAns.operation === "withdraw"){
-        let amountAns =await inquirer.prompt(
+        let amountAns = await inquirer.prompt(
             [
                 {
                     name:"amount",
@@ -40,17 +41,34 @@ if (pinAns.pin === myPin){
                     type:"number",
                 }
             ]
-        );
+        )
+if(amountAns.amount <= myBalance){
 //= -= +=
      myBalance -=   amountAns.amount ;
 
-     console.log("Your remaining balance is:" +myBalance)
+     console.log(chalk.green(`Your remaining balance is: ${myBalance}`));
     }
-    else if (operationAns.operation === "check balance"){
-      console.log("your balance is:" + myBalance)
-      console.log(`Your remaining balance is, ${myBalance}`)
+    else(console.log(chalk.red("Insufficient Balance")))
 }
-    }
+ if (operationAns.operation === "check balance"){
+      console.log(chalk.blue(`Your current balance is: ${myBalance}`));
+}
+if (operationAns.operation === "Fast Cash"){
+    let CashAns = await inquirer.prompt(
+    [
+        {
+            name:"Amount",
+            message:"Choose your desired amount",
+            type:"list",
+            choices:["1000","2000","5000","1000"]
+        }
+    ]
+    )
+    myBalance -= CashAns.Amount
+    console.log(chalk.yellow(`Your remaining balance is: ${myBalance}`));
+}
+
+}
 else {
-console.log("Incorret pin number");
+console.log(chalk.redBright("Incorret pin number"));
 }
