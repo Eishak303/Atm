@@ -66,11 +66,12 @@ if (operationAns.operation === "Fast Cash"){
     )
     myBalance -= CashAns.Amount
     console.log(chalk.yellow(`Your remaining balance is: ${myBalance}`));
-}
-   //==============================EISHA KANWAL==================================
-   
+}   
 
 }
 else {
 console.log(chalk.redBright("Incorret pin number"));
 }
+
+
+//==============================EISHA KANWAL==================================
